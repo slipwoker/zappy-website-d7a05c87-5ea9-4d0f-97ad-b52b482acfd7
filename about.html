@@ -1,0 +1,607 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אודות - וונג v2</title>
+  <meta name="description" content="About - וונג v2 provides professional מסעדנות services. Specializing in מסעדה אסייתית.">
+  <meta name="keywords" content="מסעדה אסייתית, מסעדה אסייתית בריאה בישראל, וונג v2 מסעדה, אוכל אסייתי אותנטי למשלוח">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="אודות - וונג v2">
+  <meta property="og:description" content="About - וונג v2 provides professional מסעדנות services. Specializing in מסעדה אסייתית.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="אודות - וונג v2">
+  <meta name="twitter:description" content="About - וונג v2 provides professional מסעדנות services. Specializing in מסעדה אסייתית.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'd7a05c87-5ea9-4d0f-97ad-b52b482acfd7',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="וונג v2" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/menu">תפריט</a></li><li><a href="/about">אודות</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="about-hero-section" data-layout-spec="About-hero" data-hero-type="fullscreen-scrim">
+  <div class="about-hero-bg-wrapper">
+    <img data-placeholder="about-hero-bg" data-context="Low-key atmospheric restaurant dining room scene for an Asian fusion restaurant called Wong v2. Dark wood tables and chairs, warm candlelight creating soft reflections on polished surfaces, subtle neon edge lighting (cyan and magenta tones) glowing from the environment - perhaps a neon sign partially visible in background or accent lighting along walls. Moody, intimate ambiance with dramatic shadows and highlights. Professional food photography style, cinematic composition, shallow depth of field focusing on the dining space. Dark, sophisticated atmosphere perfect for late-night dining experience." class="about-hero-bg-image" width="1200" height="800" src="/assets/site-about-hero-bg.webp" alt="אווירת מסעדה אינטימית עם תאורת נרות ואקסנטים ניאון">
+    <div class="about-hero-scrim" aria-hidden="true"></div>
+  </div>
+  
+  <div class="about-hero-content-wrapper">
+    <div class="about-hero-overlay-group">
+      <h1 class="about-hero-h1">אודות</h1>
+      <h3 class="about-hero-subtitle">אש, עונתיות והכנסת אורחים עד שעות הלילה המאוחרות – הפילוסופיה שלנו</h3>
+      <a href="/contact" class="about-hero-cta btn-cta-long">התחל בקשת הזמנה</a>
+    </div>
+  </div>
+  
+  <div class="about-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="about-hero-divider-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#01A9BC;stop-opacity:0.4"></stop>
+          <stop offset="50%" style="stop-color:#C20A8F;stop-opacity:0.4"></stop>
+          <stop offset="100%" style="stop-color:#01A9BC;stop-opacity:0.4"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,100 L0,60 Q200,58 400,62 T800,58 Q1000,62 1200,60 L1200,100 Z" fill="var(--bg-light)"></path>
+      <path d="M0,60 Q200,58 400,62 T800,58 Q1000,62 1200,60" fill="none" stroke="url(#about-hero-divider-gradient)" stroke-width="1"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="about-story-section" data-layout-spec="About-story">
+  <div class="about-story-corner-accent"></div>
+  <div class="about-story-container">
+    <h2 class="about-story-title">מטבח ליליי במדויק</h2>
+    <div class="about-story-columns">
+      <div class="about-story-main-column">
+        <p>הכול התחיל בלילה שקט בתל אביב, כשהעיר כבר נרדמה והרחובות התרוקנו. במטבח קטן ומוארך, שף צעיר החליט שהזמן הטוב ביותר ליצור הוא כשהעולם שותק. כך נולד וונג – מקום שבו האנרגיה הליליית והמיקוד המוחלט על כל פרט יוצרים חוויה קולינרית ייחודית.</p>
+        <p>אנחנו מאמינים שאוכל טוב מתחיל בחומרי גלם מעולים. כל בוקר, אנחנו בוחרים ירקות טריים, תבלינים ארומטיים ובשר איכותי מספקים מקומיים שאנחנו סומכים עליהם. המסע שלנו הוא מהשוק אל הצלחת – בלי פשרות, בלי קיצורי דרך.</p>
+        <h3 class="about-story-pullquote">"בלילה, כשהעולם שקט, האוכל מדבר בקול הכי חזק."</h3>
+        <p>האירוח שלנו הוא לא רק על האוכל. זה על התחושה שאתם מקבלים כשאתם נכנסים – האור העמום, המוזיקה הרכה, והתשומת הלב לכל פרט קטן. אנחנו רוצים שכל ארוחה אצלנו תהיה רגע של בריחה, מקום שבו אתם יכולים להירגע, ליהנות ולהתחבר.</p>
+      </div>
+      <div class="about-story-divider"></div>
+      <div class="about-story-secondary-column">
+        <p>הפילוסופיה שלנו פשוטה: לבשל עם לב, לשרת בחום ולהיות נאמנים למקורות. כל מנה שיוצאת מהמטבח שלנו עוברת בדיקה קפדנית – הטעם, המרקם, המצגת. אנחנו לא מתפשרים על איכות, גם לא בלילות העמוסים ביותר.</p>
+        <p>בסופו של דבר, וונג הוא יותר ממסעדה. זה מקום שבו אנשים באים לחגוג, להתאסף ולחוות רגעים שנשארים איתם הרבה אחרי שהם עוזבים. אנחנו מזמינים אתכם להצטרף למסע הזה – לטעום, לחוות ולהרגיש את האנרגיה שמניעה אותנו כל לילה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-team-section" data-layout-spec="About-team">
+  <div class="about-team-container">
+    <div class="about-team-layout">
+      <div class="about-team-portrait-wrapper">
+        <div class="about-team-portrait-frame">
+          <img data-placeholder="about-team-portrait" data-context="Professional portrait of a confident Asian restaurant chef/owner in a modern dark kitchen, wearing chef whites, warm dramatic lighting, cinematic composition for upscale Asian dining establishment" width="600" height="800" src="/assets/site-about-team-portrait.webp" alt="השף והבעלים של וונג v2">
+          <div class="about-team-portrait-vignette"></div>
+        </div>
+      </div>
+      
+      <div class="about-team-content-wrapper">
+        <div class="about-team-content">
+          <h2 class="about-team-title">האנשים מאחורי הפאס</h2>
+          <p class="about-team-intro">מנהיגות עקבית ותשוקה לפרפקציה הן הבסיס לכל מנה שיוצאת מהמטבח שלנו.</p>
+          
+          <div class="about-team-cards">
+            <article class="about-team-card">
+              <h3 class="about-team-card-title">דניאל וונג</h3>
+              <p class="about-team-card-role">שף ומייסד</p>
+              <p class="about-team-card-bio">עם למעלה מ-15 שנות ניסיון במטבחים אסייתיים מובילים ברחבי העולם, דניאל מביא גישה עכשווית למתכונים מסורתיים. התשוקה שלו לאיכות ולחומרי גלם טריים משתקפת בכל פרט בתפריט.</p>
+            </article>
+            
+            <article class="about-team-card">
+              <h3 class="about-team-card-title">מיה צ'אן</h3>
+              <p class="about-team-card-role">מנהלת משקאות ויין</p>
+              <p class="about-team-card-bio">מומחית סומלייה עם התמחות במשקאות אסייתיים וקוקטיילים מודרניים. מיה אחראית על בחירת היינות והסאקה המושלמים שמשלימים את חוויית האוכל, ויוצרת התאמות ייחודיות לכל מנה.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="about-team-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#F6C85E;stop-"></stop>
+          <stop offset="50%" style="stop-color:#F6C85E;stop-opacity:0.8"></stop>
+          <stop offset="100%" style="stop-color:#F6C85E;stop-"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,100 L0,65 L1200,20 L1200,100 Z" fill="var(--bg-light)"></path>
+      <line x1="0" y1="65" x2="1200" y2="20" stroke="url(#goldLine)" stroke-width="2"></line>
+    </svg>
+  </div>
+</section>
+
+<section class="about-stats-section" data-layout-spec="About-stats">
+  <div class="about-stats-container">
+    <div class="about-stats-header">
+      <h2>בנוי על לילות שחוזרים על עצמם.</h2>
+      <p>עקביות היא המרכיב הסודי שלנו – כל ערב, אותה מסירות לפרטים.</p>
+    </div>
+    
+    <div class="about-stats-grid">
+      <div class="stat-card">
+        <h3>4 שינויים עונתיים בשנה</h3>
+        <p>התפריט שלנו מתחדש עם העונות, משתמש במרכיבים העונתיים הטריים ביותר כדי להבטיח טעם ואיכות מרבית בכל מנה.</p>
+      </div>
+      
+      <div class="stat-card">
+        <h3>12 טכניקות חתימה</h3>
+        <p>מווק מושלם ועד סוטה עדין – כל טכניקה מושלמת במשך שנים כדי להביא את המטבח האסייתי האותנטי שלנו לחיים.</p>
+      </div>
+      
+      <div class="stat-card">
+        <h3>90 דקות זמן ישיבה ממוצע</h3>
+        <p>האורחים שלנו לוקחים את הזמן שלהם, נהנים מכל מנה בקצב שלהם – בדיוק כמו שצריך להיות בחוויה קולינרית אמיתית.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="about-stats-glow"></div>
+</section>
+
+<section class="about-press-section" data-layout-spec="About-press">
+  <div class="about-press-container">
+    <div class="about-press-intro">
+      <h2>רשימות מהעיר.</h2>
+      <p>הכרה ממבקרי האוכל המובילים ומפרסומים קולינריים ברחבי תל אביב.</p>
+    </div>
+    
+    <div class="about-press-grid">
+      <article class="about-press-card">
+        <h3>טיים אאוט ישראל</h3>
+        <p>"וונג v2 מציעה חוויה אסייתית אותנטית עם טוויסט עכשווי. המנות מעוצבות בקפידה, והטעמים מאוזנים בצורה מושלמת. מסעדה שמוכיחה שאוכל אסייתי בריא יכול להיות גם מרגש."</p>
+      </article>
+      
+      <article class="about-press-card">
+        <h3>הארץ - תוספת אוכל</h3>
+        <p>"המטבח של וונג v2 משלב מסורת עם חדשנות. כל מנה מספרת סיפור, והשפים מצליחים ליצור איזון מדויק בין מרקמים וטעמים. חובה לכל חובבי המטבח האסייתי."</p>
+      </article>
+      
+      <article class="about-press-card">
+        <h3>ידיעות אחרונות</h3>
+        <p>"אחת המסעדות האסייתיות הבריאות והמעניינות בתל אביב. וונג v2 מביאה גישה רעננה לקלאסיקות, עם דגש על מרכיבים טריים ואיכותיים. חוויה קולינרית שלא תישכח."</p>
+      </article>
+      
+      <article class="about-press-card">
+        <h3>גורמה - מגזין האוכל</h3>
+        <p>"המסעדה מצליחה ליצור אווירה אינטימית ומזמינה, בשילוב עם תפריט מגוון ומפתיע. הקוקטיילים ייחודיים, והשירות מקצועי. מקום שחובה לבקר בו."</p>
+      </article>
+      
+      <article class="about-press-card">
+        <h3>וואלה אוכל</h3>
+        <p>"וונג v2 מעלה את הרף של המסעדנות האסייתית בישראל. השילוב של מתכונים מסורתיים עם טכניקות מודרניות יוצר חוויה ייחודית ובלתי נשכחת."</p>
+      </article>
+      
+      <article class="about-press-card">
+        <h3>מעריב - סופשבוע</h3>
+        <p>"מסעדה שמוכיחה שאפשר לשלב בין אוכל בריא לבין חוויה קולינרית מרגשת. התפריט מגוון, העיצוב מרשים, והאווירה מושלמת לערב זוגי או פגישה עם חברים."</p>
+      </article>
+    </div>
+  </div>
+  
+  <div class="about-press-glow"></div>
+</section>
+  </main>
+  
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-column footer-brand">
+        <img src="/assets/business-logo.webp" alt="וונג v2" class="logo" />
+        <p class="footer-tagline">חוויה קולינרית אסייתית אותנטית</p>
+      </div>
+      
+      <div class="footer-column footer-links">
+        <h3 class="footer-title">קישורים מהירים</h3>
+        <ul class="footer-menu">
+          <li><a href="/menu">תפריט</a></li>
+          <li><a href="/about">אודות</a></li>
+          <li><a href="/contact">צור קשר</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column footer-contact">
+        <h3 class="footer-title">צור קשר</h3>
+        <ul class="contact-list">
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:[business_email]">[business_email]</a>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:[business_phone]">[business_phone]</a>
+          </li>
+          <li><a href="/"><i class="fas fa-map-marker-alt"></i>
+            <span>[business_address]</span></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column footer-social">
+        <h3 class="footer-title">עקבו אחרינו</h3>
+        <div class="social-links">
+          <a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="/privacy">מדיניות פרטיות</a>
+        <span class="separator">|</span>
+        <a href="/terms">תנאים והגבלות</a>
+        <span class="separator">|</span>
+        <a href="/accessibility">הצהרת נגישות</a>
+      </div>
+      
+      <div class="footer-copyright">
+        <p>© 2026 וונג v2. כל הזכויות שמורות.</p>
+      </div>
+      
+      <div class="footer-attribution">
+        <a href="https://zappy5.com" target="_blank" class="zappy-attribution" rel="noopener noreferrer">Generated by Zappy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
