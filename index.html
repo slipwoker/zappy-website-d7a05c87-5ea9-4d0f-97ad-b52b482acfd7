@@ -254,7 +254,7 @@
       .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
       /* Submenu item styling */
       .sub-menu li { list-style: none; margin: 0; padding: 0; }
-      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
       .sub-menu a:hover { background-color: #f5f5f5; }
       /* RTL (Hebrew/Arabic) dropdown positioning */
       [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
@@ -300,16 +300,16 @@
 
   <nav class="navbar" dir="rtl">
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
-    <svg class="hamburger-icon" width="24" height="24" viewbox="0 0 24 24" fill="none">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
-    <svg class="close-icon" width="24" height="24" viewbox="0 0 24 24" fill="none" style="display:none;">
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
       <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
   </button>
   
   <button class="phone-header-btn" aria-label="Call">
-    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
     </svg>
   </button>
@@ -348,7 +348,7 @@
   </div>
   
   <div class="home-hero-divider-wrapper">
-    <svg aria-hidden="true" viewbox="0 0 1200 120" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="home-hero-divider-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#0B0E12;stop-opacity:1"></stop>
@@ -372,19 +372,19 @@
       <!-- Testimonial Card 1 -->
       <article class="testimonial-card">
         <div class="testimonial-rating">
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
         </div>
@@ -405,19 +405,19 @@
       <!-- Testimonial Card 2 -->
       <article class="testimonial-card">
         <div class="testimonial-rating">
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
         </div>
@@ -438,19 +438,19 @@
       <!-- Testimonial Card 3 -->
       <article class="testimonial-card">
         <div class="testimonial-rating">
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
         </div>
@@ -471,19 +471,19 @@
       <!-- Testimonial Card 4 -->
       <article class="testimonial-card">
         <div class="testimonial-rating">
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
-          <svg class="star-icon" width="20" height="20" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg class="star-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"></path>
           </svg>
         </div>
@@ -510,7 +510,7 @@
   <div class="home-features-container">
     <div class="home-features-content">
       <h2 class="home-features-title">מנות חתימה, רעש מינימלי.</h2>
-      <p class="home-features-intro">תפריט מונחה שף עם קצב עונתי. כל מנה מעוצבת בדיוק, מנוסחת מחדש עם כל עונה, ומגיעה לשולחן כשהיא מושלמת.</p>
+      <p class="home-features-intro">תפריט מונחה שף עם קצב עונתי. כל מנה מעוצבת בדיוק, מנוסחת מחדש עם כל עונה, ומגיעה לשולחן כשהיא מושלמת. ניסיון ניסיון</p>
       
       <div class="home-features-cards">
         <article class="home-features-card">
@@ -540,7 +540,7 @@
   </div>
   
   <div class="home-features-divider-wrapper">
-    <svg aria-hidden="true" viewbox="0 0 1200 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="home-features-mist-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:#C20A8F;stop-opacity:0.6"></stop>
@@ -595,7 +595,7 @@
   </div>
   
   <div class="home-gallery-divider-wrapper">
-    <svg aria-hidden="true" viewbox="0 0 1200 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,100 L0,45 Q100,38 200,42 T400,35 Q500,40 600,38 T800,42 Q900,35 1000,40 T1200,38 L1200,100 Z" fill="#0B0E12"></path>
       <path d="M0,100 L0,46 Q100,39 200,43 T400,36 Q500,41 600,39 T800,43 Q900,36 1000,41 T1200,39 L1200,100 Z" fill="var(--accent)" opacity="0.3"></path>
     </svg>
@@ -631,7 +631,7 @@
   </div>
   
   <div class="home-testimonials-divider-wrapper">
-    <svg aria-hidden="true" viewbox="0 0 1200 80" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="testimonials-divider-glow" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color:#01A9BC;stop-opacity:0.3"></stop>
