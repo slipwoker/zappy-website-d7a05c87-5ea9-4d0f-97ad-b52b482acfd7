@@ -7,30 +7,47 @@
 ## Pages
 
 ### Home
-https://wong-v2.zappy5.app
+https://vong.co.il
 
 ### Menu
-https://wong-v2.zappy5.app/menu
+https://vong.co.il/menu
 
 ### About
-https://wong-v2.zappy5.app/about
+https://vong.co.il/about
 
 ### Contact
-https://wong-v2.zappy5.app/contact
+https://vong.co.il/contact
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://wong-v2.zappy5.app/privacy
+https://vong.co.il/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://wong-v2.zappy5.app/terms
+https://vong.co.il/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://wong-v2.zappy5.app/accessibility
+https://vong.co.il/accessibility
 Information about WCAG compliance and accessibility features.
+
+---
+
+## How to Contact Us
+
+- (No contact details configured yet.)
+
+### Contact form
+- URL: https://vong.co.il/contact
+- Endpoint: https://vong.co.il/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel, required)
+  - `message` (textarea, required)
 
 ---
 
@@ -49,7 +66,8 @@ Information about WCAG compliance and accessibility features.
 
 ---
 
-# Additional Resources
+# Machine-readable feeds
 
-- **Sitemap**: https://wong-v2.zappy5.app/sitemap.xml
-- **Robots.txt**: https://wong-v2.zappy5.app/robots.txt
+- Sitemap (XML): https://vong.co.il/sitemap.xml
+- Robots: https://vong.co.il/robots.txt
+- Flattened page text (for LLMs): https://vong.co.il/llms-full.txt
